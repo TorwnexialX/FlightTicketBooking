@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Bootstrap 4.5.2 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tempus Dominus Bootstrap-4 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
+    <!-- Font Awesome 5.15.3 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- jQuery 3.5.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Moment.js Library for Date and Time Manipulation 2.29.1 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Bootstrap 4.5.2 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Tempus Dominus Bootstrap-4 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+    
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+    <style> {% block style %} {% endblock %}</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">航空订票系统</a>
+        <!--小屏适应-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'flight-create' %}">录入航班</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customer-list' %}">查看乘客信息</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'flight-list' %}">查看航班信息</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'book-ticket' %}">订票</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cancel-ticket' %}">退票</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    {% block content %}{% endblock %}
+</body>
+</html>

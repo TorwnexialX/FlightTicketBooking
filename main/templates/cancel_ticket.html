@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}机票退订{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2 align="center">机票退订</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" id="cancelTicketForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name"><i class="fa fa-user"></i> &nbsp 姓名</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_number"><i class="fa fa-address-card"></i> &nbsp 身份证号</label>
+                    <input type="text" class="form-control" id="id_number" name="id_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="flight_number"><i class="fa fa-barcode"></i> &nbsp 航班号</label>
+                    <input type="text" class="form-control" id="flight_number" name="flight_number" required>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-danger">退票</button>
+                </div>      
+            </form>
+            <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        $('#cancelTicketForm').on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = '{% url "customer-list" %}';
+                    } else {
+                        $('#error-message').text(response.error).show();
+                    }
+                },
+                error: function() {
+                    $('#error-message').show();
+                }
+            });
+        });
+    });
+    </script>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}编辑航班{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2 align="center">编辑航班</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="flight_number"><i class="fa fa-barcode"></i> &nbsp 航班号</label>
+                    <input type="text" class="form-control" id="flight_number" name="flight_number" value="{{ form.flight_number.value }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="plane_number"><i class="fa fa-fighter-jet"></i>&nbsp 飞机型号</label>
+                    <input type="text" class="form-control" id="plane_number" name="plane_number" value="{{ form.plane_number.value }}" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="departure"><i class="fa fa-plane-departure"></i>&nbsp 始发地</label>
+                        <input type="text" class="form-control" id="departure" name="departure" value="{{ form.departure.value }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="arrival"><i class="fa fa-plane-arrival"></i>&nbsp 到达地</label>
+                        <input type="text" class="form-control" id="arrival" name="arrival" value="{{ form.arrival.value }}" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="depart_time"><i class="fa fa-clock"></i>&nbsp 起飞时间</label>
+                        <div class="input-group date" id="depart_time_picker" data-target-input="nearest">
+                            <input type="text" id="depart_time" name="depart_time" class="form-control datetimepicker-input" data-target="#depart_time_picker" value="{{ form.depart_time.value|date:'Y-m-d H:i' }}" placeholder="起飞日期和时间">
+                            <div class="input-group-append" data-target="#depart_time_picker" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="arrive_time"><i class="fa fa-clock"></i>&nbsp 落地时间</label>
+                        <div class="input-group date" id="arrive_time_picker" data-target-input="nearest">
+                            <input type="text" id="arrive_time" name="arrive_time" class="form-control datetimepicker-input" data-target="#arrive_time_picker" value="{{ form.arrive_time.value|date:'Y-m-d H:i' }}" placeholder="落地日期和时间">
+                            <div class="input-group-append" data-target="#arrive_time_picker" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="total_seats"><i class="fa fa-users"></i>&nbsp 总座位数</label>
+                    <input type="number" class="form-control" id="total_seats" name="total_seats" value="{{ form.total_seats.value }}" required>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">保存修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#depart_time_picker').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm'
+            });
+            $('#arrive_time_picker').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm'
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#total_seats').on('input', function() {
+                const value = $(this).val();
+                if (value < 1 || !Number.isInteger(Number(value))) {
+                    this.setCustomValidity('请输入一个正整数');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+        });
+    </script>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Flight List{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 85%;">
+    <div class="card">
+        <div class="card-header">
+            <h2 align="center">航班信息列表</h2>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">航班号</th>
+                        <th scope="col">飞机号</th>
+                        <th scope="col">出发地</th>
+                        <th scope="col">目的地</th>
+                        <th scope="col">起飞时间</th>
+                        <th scope="col">落地时间</th>
+                        <th scope="col">容量</th>
+                        <th scope="col">已订</th>
+                        <th scope="col">余票数</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for flight in flights %}
+                    <tr>
+                        <td>{{ flight.flight_number }}</td>
+                        <td>{{ flight.plane_number }}</td>
+                        <td>{{ flight.departure }}</td>
+                        <td>{{ flight.arrival }}</td>
+                        <td>{{ flight.depart_time }}</td>
+                        <td>{{ flight.arrive_time }}</td>
+                        <td>{{ flight.total_seats }}</td>
+                        <td>{{ flight.booked_seats }}</td>
+                        <td>{{ flight.available_seats }}</td>
+                        <td>
+                            <a href="{% url 'flight-edit' flight.pk %}" class="btn btn-primary btn-sm">编辑</a>
+                            <form method="post" action="{% url 'delete-flight' flight.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
