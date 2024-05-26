@@ -23,4 +23,8 @@ FlightTicketBooking *
 
 注意：
 
-1. 若出现错误或`models.py`进行修改，则仍在该文件夹下执行`python manage.py makemigrations`， `python manage.py migrate` 命令
+若出现错误或`models.py`进行修改，则仍在该文件夹下执行`python manage.py makemigrations`， `python manage.py migrate` 命令
+
+### 关于部署
+
+该项目可用uWSGI部署，部署时注意`./FlightTicketBooking/settings.py`要进行更改，直接将`./FlightTicketBooking/settings_deploy.py`中的内容覆盖到原`settings.py`即可
