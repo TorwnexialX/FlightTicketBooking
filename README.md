@@ -24,4 +24,3 @@ FlightTicketBooking *
 注意：
 
 1. 若出现错误或`models.py`进行修改，则仍在该文件夹下执行`python manage.py makemigrations`， `python manage.py migrate` 命令
-2. 进入"http://127.0.0.1:8000/admin"可以查看数据库后台，超级用户的用户名为`admin`，密码为`admin`
