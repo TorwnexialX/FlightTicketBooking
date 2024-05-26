@@ -23,10 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-804=^syp-sk4y&(-x$6$9)u@xpt(r*$%lf$^=#boc%)3e+n+j%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
-
+DEBUG = True
 
 # Application definition
 
@@ -51,9 +48,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'FlightTicketBooking.urls'
-
-CSRF_ALLOWED_ORIGINS = ['http://www.torwnexial.com']
-CSRF_TRUSTED_ORIGINS = ['http://www.torwnexial.com'] 
 
 TEMPLATES = [
     {
